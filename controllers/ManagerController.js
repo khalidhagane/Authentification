@@ -4,7 +4,7 @@
 // acess : public
 const Manager = (req,res) => {
     // res.status(200).send(req.body)
-    res.status(200).send("I'am manager " )
+    res.status(200).json({mssage:'I am manager '} )
 }
 
 
