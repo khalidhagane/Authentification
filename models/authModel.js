@@ -1,21 +1,19 @@
-
-
-
 const mongoose = require('mongoose')
 
 // // create Schema
 const userSchema = mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'please add a neme']
-    },email: {
+        required: true
+      },
+    email: {
         type: String,
-        required: [true, 'please add a email'],
+        required: true,
         unique: true
     },
     password: {
         type: String,
-        required: [true, 'please add a password']
+        required: true
       },
     },
     //   token: {
@@ -31,7 +29,7 @@ const userSchema = mongoose.Schema({
     timestamps:true
 }
 )
-module.exports = mongoose.model('authModel',userSchema)
+module.exports = mongoose.model('User',userSchema)
 
 // // create model
 // // app.post('/', (req, res) =>{
