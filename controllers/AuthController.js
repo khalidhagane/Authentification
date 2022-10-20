@@ -3,7 +3,11 @@ const bcryptjs= require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/authModel')
 const nodemailer = require('nodemailer');
+
 // const userModel = require('../models/userModel')
+// const bcrypt= require('bcrypt');
+const crypto = require('crypto');
+
 
 
 //method post 
@@ -45,12 +49,12 @@ const Regester = asyncHandler(async (req,res) => {
         email,
         password: hashedPassword,
         status:false,
-        token:null,
+        token: crypto.randomBytes(64).toString('hex'),
         role:role
         
 
     })
-
+ 
     // const gToken = generer_token(user._id,user.email)
 
     // res.status(201).json({token: gToken})
@@ -61,7 +65,7 @@ const Regester = asyncHandler(async (req,res) => {
     res.json(user)
 
     // rappel function send email
-    sendemail(user.email);
+    sendemail(user.email,user.token);
 
     if(user){
         res.status(201).json(user)
@@ -83,34 +87,47 @@ const Regester = asyncHandler(async (req,res) => {
 
 //--------------------------------- 
 // function sendemail
-    function sendemail(email) {
+    function sendemail(email,token) {
             let mailTransporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'khalidhagane62@gmail.com',
+                    user: process.env.EMAIL,
                     pass: process.env.password_email
                 }
             });
             
             let mailDetails = {
-                from: 'khalidhagane62@gmail.com',
+                from: process.env.EMAIL,
                 to: email,
                 subject: 'Test mail',
-                text: 'Node.js testing mail for GeeksforGeeks'
+                text: 'Node.js testing mail for GeeksforGeeks',
+                html: `<h2 >Pls Click on The link <a href="http://localhost:8081/api/auth/verifieremail/${token}">validation</a></h2>`, // html body
             };
             
-            mailTransporter.sendMail(mailDetails, function(err, data) {
-                if(err) {
-                    console.log(err);
-                } else {
-                    console.log('Email sent successfully');
-                }
-            });
+            try {
+                mailTransporter.sendMail(mailDetails)
+            } catch (error) {
+                console.log(error)
+            }
 
     }
 })
 
+//------------------------ function verification
+const verificationEmail = async (req,res)=>{
+    const emailtoken = req.params.token
+    const user = await User.findOne({token:emailtoken})
+    if(user){
+        user.token = null
+        user.status = true
+        await user.save();
+    } 
+    else{
+        console.log("tekon non valid")
+    }
+}
 
+//------------------------ function verification
 // const generer_token = async(id,email)=>{
 //     return jwt.sign({ email: email,  _id: id }, process.env.JWT_SECRET_KEY,
 //         { expiresIn: '10m' });
@@ -138,5 +155,5 @@ const Resetpassword =  (req,res) => {
     
 }
 
-module.exports = {Login,Regester,Forgetpassword,Resetpassword};
+module.exports = {Login,Regester,Forgetpassword,Resetpassword,verificationEmail};
 
