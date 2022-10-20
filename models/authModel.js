@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 // // create Schema
-const userSchema = mongoose.Schema({
+const authSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -15,21 +15,26 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
       },
-    },
-    //   token: {
-    //       type: String,
-    //       required: true
-    //     },
-    // status: {
-    //     type: String,
-    //     required: true
-    //   }
-
-{
-    timestamps:true
-}
+      role:{
+        type:String,
+        required:true
+        // role: //variable role
+      },
+    
+      token: {
+          type: String,
+          
+        },
+    status: {
+        type: Boolean,
+        required: true
+      }
+},
+    {
+        timestamps:true
+    }
 )
-module.exports = mongoose.model('User',userSchema)
+module.exports = mongoose.model('User',authSchema)
 
 // // create model
 // // app.post('/', (req, res) =>{

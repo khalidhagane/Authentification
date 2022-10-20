@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcryptjs= require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/authModel')
+const nodemailer = require('nodemailer');
 // const userModel = require('../models/userModel')
 
 
@@ -9,8 +10,6 @@ const User = require('../models/authModel')
 // url : /api/auth/login
 // acess : public
 const Login =  (req,res) => {
-    // res.status(200).send(req.body)
-    // res.status(200).json({mssage:'teste Regester'})
     const {email , password, name }= req.body
 
     if(!email || !password){
@@ -24,52 +23,100 @@ const Login =  (req,res) => {
 }
 
 const Regester = asyncHandler(async (req,res) => {
+    const {email , password, name, role }= req.body
 
-    const {email , password, name }= req.body
-
-    if(!email || !password || !name){
+    if(!email || !password || !name || !role){
         res.status(400)
         throw new Error('Please add all fields ')
     }
 
     // check if user exists
     const authExists = await User.findOne({email})
-    // const authExists = await User.findOne({email : email})
     if(authExists){
-        // console.log("ggggggggggggggggggggggggggggg!g")
         res.status(400).send("user already exist")
-        // throw new Error('user already exists')
     }
     //hash password
     const salt = await bcryptjs.genSalt(10)
     const hashedPassword = await bcryptjs.hash(password,salt)
 
     // create user
-    const user_ = await User.create({
+    let user = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        status:false,
+        token:null,
+        role:role
+        
+
     })
 
-    if(user_){
-        res.status(201).json({
-            _id : user_.id,
-            name : user_.name,
-            email: user_.email
-        })
+    // const gToken = generer_token(user._id,user.email)
+
+    // res.status(201).json({token: gToken})
+
+    // await User.updateOne({_id: user._id }, { $set: { token: gToken } })
+
+    // get user
+    res.json(user)
+
+    // rappel function send email
+    sendemail(user.email);
+
+    if(user){
+        res.status(201).json(user)
     }else{
-        // console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
         res.status(400)
         throw new Error('Invalid user data')
     }
 
-    // res.status(200).json({mssage:'teste Regester'})
+    // generer_token();
+// genirir token 
 
+
+    // findOne virification email
+    // const gToken = generer_token(user._id,user.email)
+    const token = jwt.sign({email: req.body.email}, config.secret)
+    //  const token = user.email
+     console.log(token)
+    
+
+//--------------------------------- 
+// function sendemail
+    function sendemail(email) {
+            let mailTransporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'khalidhagane62@gmail.com',
+                    pass: process.env.password_email
+                }
+            });
+            
+            let mailDetails = {
+                from: 'khalidhagane62@gmail.com',
+                to: email,
+                subject: 'Test mail',
+                text: 'Node.js testing mail for GeeksforGeeks'
+            };
+            
+            mailTransporter.sendMail(mailDetails, function(err, data) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log('Email sent successfully');
+                }
+            });
+
+    }
 })
 
-//m ethod post 
-// url : /api/auth/Regester    
-// acess : public
+
+// const generer_token = async(id,email)=>{
+//     return jwt.sign({ email: email,  _id: id }, process.env.JWT_SECRET_KEY,
+//         { expiresIn: '10m' });
+    
+//     }
+
 
 
 //method post 

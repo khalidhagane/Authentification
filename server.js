@@ -34,7 +34,7 @@ const routerClient =  require('./routers/clientRoute')
 
 // app.use(express.urlencoded({extended:false}))
 // app.use('/api/auth',routeUser)
-app.use('/api/auth',routerUser)
+// app.use('/api/auth',routerUser)
 app.use('/api/auth',router)
 app.use('/api/user',routerManager)
 app.use('/api/user',routerLivreur)
