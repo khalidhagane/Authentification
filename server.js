@@ -19,7 +19,7 @@ connectDB();
 
 // connectiondb()
 // dbconnection();
-const routerUser = require('./routers/userRoute')
+// const routerUser = require('./routers/userRoute')
 
 
 // const ApiError = require('./utils/apiError')
@@ -38,7 +38,7 @@ const routerClient =  require('./routers/clientRoute')
 app.use('/api/auth',router)
 app.use('/api/user',routerManager)
 app.use('/api/user',routerLivreur)
-app.use('/api/user',routerClient)
+// app.use('/api/user',routerClient)
 app.use(errorHandler)
 
 

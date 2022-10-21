@@ -9,11 +9,41 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
 
-
+// const createtoken = (id)
 //method post 
 // url : /api/auth/login
 // acess : public
-const Login =  (req,res) => {
+const Login = async (req,res) => {
+try {
+    const{ email,password}= req.body
+    const findUser = await User.findOne({ email : email})
+    if(findUser){
+        const match = await bcryptjs.compare(password, findUser.password)
+        if (match) {
+            // res.status(200).json({mssage:'password valid'})
+            console.log('password vallid')
+            
+            
+        } else {
+            console.log('password in vallid')
+        }
+    }
+    else{
+        console.log('user not regestered')
+    }
+} catch (err) {
+    console.log(err)
+    
+}
+
+
+
+
+
+
+
+
+// ---------------- partie handler error ------------------
     const {email , password, name }= req.body
 
     if(!email || !password){
@@ -21,11 +51,14 @@ const Login =  (req,res) => {
         throw new Error('Please add all fields ')
     }
     else {
-        res.status(200).json({mssage:'teste Regester'})
+        res.status(200).json({mssage:'les inpots is valid'})
     }
-    
+// ---------------- partie handler error ------------------
 }
 
+//method post 
+// url : /api/auth/regester
+// acess : public
 const Regester = asyncHandler(async (req,res) => {
     const {email , password, name, role }= req.body
 
