@@ -7,9 +7,15 @@ const nodemailer = require('nodemailer');
 // const userModel = require('../models/userModel')
 // const bcrypt= require('bcrypt');
 const crypto = require('crypto');
+const { json } = require('express');
 
 
-// const createtoken = (id)
+const createToken = (id) =>{
+    return jwt.sign({id}, process.env.JWT_SECRET,{
+        expiresIn : '1d'
+    })
+}
+// console.log(createToken)
 //method post 
 // url : /api/auth/login
 // acess : public
@@ -20,12 +26,19 @@ try {
     if(findUser){
         const match = await bcryptjs.compare(password, findUser.password)
         if (match) {
+            //create token 
+            const token = createToken(findUser.id)
+            // start token in cookie 
+            res
+                .cookie('access-token',token)
+                .send('logged in succefully')
+            // console.log(token)
             // res.status(200).json({mssage:'password valid'})
-            console.log('password vallid')
-            
+            console.log('logged in succefully')
             
         } else {
-            console.log('password in vallid')
+            console.log('password incorrect')
+            res.send('password incorrect')
         }
     }
     else{
@@ -83,10 +96,11 @@ const Regester = asyncHandler(async (req,res) => {
         password: hashedPassword,
         status:false,
         token: crypto.randomBytes(64).toString('hex'),
-        role:role
+        role,
         
 
     })
+    
  
     // const gToken = generer_token(user._id,user.email)
 
@@ -95,7 +109,7 @@ const Regester = asyncHandler(async (req,res) => {
     // await User.updateOne({_id: user._id }, { $set: { token: gToken } })
 
     // get user
-    res.json(user)
+    // res.json(user)
 
     // rappel function send email
     sendemail(user.email,user.token);
@@ -106,21 +120,22 @@ const Regester = asyncHandler(async (req,res) => {
         res.status(400)
         throw new Error('Invalid user data')
     }
+    // console.log(user)
 
     // generer_token();
 // genirir token 
 
 
-    // findOne virification email
-    // const gToken = generer_token(user._id,user.email)
-    const token = jwt.sign({email: req.body.email}, config.secret)
-    //  const token = user.email
-     console.log(token)
+    // // findOne virification email
+    // // const gToken = generer_token(user._id,user.email)
+    // const token = jwt.sign({email: req.body.email}, config.secret)
+    // //  const token = user.email
+    //  console.log(token)
     
-
+})
 //--------------------------------- 
 // function sendemail
-    function sendemail(email,token) {
+const sendemail = (email,token) => {
             let mailTransporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -144,7 +159,7 @@ const Regester = asyncHandler(async (req,res) => {
             }
 
     }
-})
+
 
 //------------------------ function verification
 const verificationEmail = async (req,res)=>{
@@ -167,26 +182,81 @@ const verificationEmail = async (req,res)=>{
     
 //     }
 
+const sendEmailPassword = (email,token) => {
+    let mailTransporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.password_email
+        }
+    });
+    
+    let mailDetails = {
+        from: process.env.EMAIL,
+        to: email,
+        subject: 'rest password',
+        text: 'Node.js testing mail for GeeksforGeeks',
+        html: `<h2 >Pls Click on The link <a href="http://localhost:8081/api/auth/resetpassword/${token}">rest password</a></h2>`, // html body
+    };
+    
+    try {
+        mailTransporter.sendMail(mailDetails)
+    } catch (error) {
+        console.log(error)
+    }
 
+}
 
 //method post 
 // url : /api/auth/Forgetpassword
 // acess : public
-const Forgetpassword = (req,res) => {
+const Forgetpassword = async (req,res) => {
     // res.status(200).send(req.body)
     // res.status(200).json({mssage:'teste Forgetpassword'})
     
+    const {email}= req.body
+    const user = await User.findOne({email})
+
+    if(!user)return res.status(400).json({err: 'Please add email'})
+    
+    const token = createToken(user.id)
+    // console.log(token)
+
+    try{
+        sendEmailPassword(user.email, token)
+        res.send('mail sent succefully')
+    } catch(error) {
+        console.log(error)
+    }
 
 }
+
+
+
 
 //method post 
 // url : /api/auth/resetpassword
 // acess : public
-const Resetpassword =  (req,res) => {
+const Resetpassword =  asyncHandler ( async (req,res) => {
     // res.status(200).send(req.body)
     // res.status(200).json({mssage:'teste Resetpassword'})
+    const {password} = req.body
+    const token =  req.params.token
+    console.log(token)
+    const userid = await jwt.verify(token,process.env.JWT_SECRET)
+
+    const salt = await bcryptjs.genSalt(10)
+    const hashPassword = await bcryptjs.hash(password, salt)
     
-}
+
+    await User.findOneAndUpdate(
+
+        {_id : userid.id},
+        {password : hashPassword}
+    )
+
+    res.status(200).json({mess : 'password has update successfuly'})
+})
 
 module.exports = {Login,Regester,Forgetpassword,Resetpassword,verificationEmail};
 

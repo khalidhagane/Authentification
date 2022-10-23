@@ -4,12 +4,13 @@ const dotenv = require('dotenv').config()
 // const colors = require('colors')
 const connectDB = require('./config/configdb')
 const app = express();
-
+// const cookieparser = require('cookie-paser')
+const cookie = require('cookie-parser')
 // app .listen(port,() => console.log(`server started on port ${port}`))
 
 const mongoose = require('mongoose');
 
-
+app.use(cookie())
 // express app
 app.use(express.json())
 app.use(express.urlencoded({extended:true }))
@@ -30,6 +31,7 @@ const router = require('./routers/authRoute')
 const routerManager =  require('./routers/managerRoute')
 const routerLivreur =  require('./routers/livreurRoute')
 const routerClient =  require('./routers/clientRoute')
+
 // const {errorHandler} = require('./middlewares/errorMiddleware')
 
 // app.use(express.urlencoded({extended:false}))
@@ -38,7 +40,7 @@ const routerClient =  require('./routers/clientRoute')
 app.use('/api/auth',router)
 app.use('/api/user',routerManager)
 app.use('/api/user',routerLivreur)
-// app.use('/api/user',routerClient)
+app.use('/api/user',routerClient)
 app.use(errorHandler)
 
 

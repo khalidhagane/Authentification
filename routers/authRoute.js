@@ -6,7 +6,7 @@ const {Login,Regester,Forgetpassword,Resetpassword,verificationEmail} = require(
 router.post('/login',Login);
 router.post('/regester',Regester);
 router.post('/forgetpassword',Forgetpassword);
-router.post('/resetpassword',Resetpassword);
+router.post('/resetpassword/:token',Resetpassword);
 router.get('/verifieremail/:token',verificationEmail);
 
 
