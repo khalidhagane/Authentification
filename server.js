@@ -15,16 +15,7 @@ app.use(cookie())
 app.use(express.json())
 app.use(express.urlencoded({extended:true }))
 connectDB();
-// dotenv.config({path:'config.env'})
-// const dbconnection = require("./config/configdb")
 
-// connectiondb()
-// dbconnection();
-// const routerUser = require('./routers/userRoute')
-
-
-// const ApiError = require('./utils/apiError')
-// const globalError = require('./middlewares/errorMiddleware')
 const {errorHandler} = require('./middlewares/errorMiddleware')
 // const routeUser = require("./routers/userRoute")
 const router = require('./routers/authRoute')

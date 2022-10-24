@@ -1,5 +1,4 @@
 
-
 const jwt = require('jsonwebtoken')
 const cookie = require('cookie-parser')
 
@@ -11,7 +10,6 @@ const loginrequired = async (req,res,next)=> {
         if (validatetoken) {
             res.user = validatetoken
             console.log(res.user)
-            // console.log('token expireseeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
             next()
 
         } else {
