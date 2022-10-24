@@ -7,7 +7,9 @@ const crypto = require('crypto');
 const { json } = require('express');
 const sendemail = require('../utils/sendemail')
 const sendEmailPassword = require('../utils/sendEmailPassword')
+const Role = require('../models/roleModel')
 
+// create Token
 const createToken = (id) =>{
     return jwt.sign({id}, process.env.JWT_SECRET,{
         expiresIn : '1d'
@@ -42,7 +44,6 @@ const Login = asyncHandler(async (req,res) => {
         }
     } catch (err) {
         console.log(err)
-        
     }
     
     // ---------------- partie handler error ------------------
@@ -71,6 +72,8 @@ const Regester = asyncHandler(async (req,res) => {
 
     // check if user exists
     const authExists = await User.findOne({email})
+    const roles = await Role.findOne({role})
+    console.log(roles)
     if(authExists){
         res.status(400).send("user already exist")
     }
@@ -85,11 +88,10 @@ const Regester = asyncHandler(async (req,res) => {
         password: hashedPassword,
         status:false,
         token: crypto.randomBytes(64).toString('hex'),
-        role,
+        role: roles.id,
         
     })
     
- 
     // rappel function send email
     sendemail(user.email,user.token);
 
@@ -101,8 +103,6 @@ const Regester = asyncHandler(async (req,res) => {
     }
    
 })
-//--------------------------------- 
-
 
 //------------ function verification
 const verificationEmail = async (req,res)=>{
@@ -118,8 +118,6 @@ const verificationEmail = async (req,res)=>{
     }
 }
 
-
-
 //method post 
 // url : /api/auth/Forgetpassword
 // acess : public
@@ -127,7 +125,6 @@ const Forgetpassword = async (req,res) => {
     const {email}= req.body
     const user = await User.findOne({email})
     if(!user)return res.status(400).json({err: 'Please add email'})
-    
     const token = createToken(user.id)
     // console.log(token)
     try{
@@ -136,7 +133,6 @@ const Forgetpassword = async (req,res) => {
     } catch(error) {
         console.log(error)
     }
-
 }
 
 //method post 
@@ -147,6 +143,7 @@ const Resetpassword =  asyncHandler ( async (req,res) => {
     const token =  req.params.token
         console.log(token)
     const userid = await jwt.verify(token,process.env.JWT_SECRET)
+
     const salt = await bcryptjs.genSalt(10)
     const hashPassword = await bcryptjs.hash(password, salt)
     

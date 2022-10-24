@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
 
+const mongoose = require('mongoose')
+const Role = require('../models/roleModel')
 // // create Schema
 const authSchema = mongoose.Schema({
     name: {
@@ -16,9 +17,8 @@ const authSchema = mongoose.Schema({
         required: true
       },
       role:{
-        type:String,
-        required:true
-        // role: //variable role
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Role'
       },
     
       token: {
