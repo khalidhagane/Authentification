@@ -3,7 +3,8 @@ const cookie = require('cookie-parser')
 const Role = require('../models/roleModel')
 const User = require('../models/authModel')
 const { findOne } = require('../models/roleModel')
-const checkRoleClient = async (req,res,next)=> {
+
+const checkRoleLivreur = async (req,res,next)=> {
     const token = req.cookies['access-token']
     console.log(token)
     
@@ -12,11 +13,11 @@ const checkRoleClient = async (req,res,next)=> {
         // console.log(validatetoken.id);
         const roles = await Role.findOne({_id : users.role})
     // console.log(roles.role);
-        if(roles.role !== 'client'){
+        if(roles.role !== 'livreur'){
             res.send('access denied')
         }
         next()
    
 }
 
-module.exports = checkRoleClient
+module.exports = checkRoleLivreur
