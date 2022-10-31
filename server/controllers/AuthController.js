@@ -7,7 +7,8 @@ const crypto = require('crypto');
 const { json } = require('express');
 const sendemail = require('../utils/sendemail')
 const sendEmailPassword = require('../utils/sendEmailPassword')
-const Role = require('../models/roleModel')
+const Role = require('../models/roleModel');
+const { send } = require('process');
 
 // create Token
 const createToken = (id) =>{
@@ -112,6 +113,7 @@ const verificationEmail = async (req,res)=>{
         user.token = null
         user.status = true
         await user.save();
+        
     } 
     else{
         console.log("tekon non valid")

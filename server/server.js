@@ -3,9 +3,11 @@ const dotenv = require('dotenv').config()
 const connectDB = require('./config/configdb')
 const app = express();
 const cookie = require('cookie-parser')
+const cors = require('cors')
 
 const mongoose = require('mongoose');
 
+app.use(cors())
 app.use(cookie())
 app.use(express.json())
 app.use(express.urlencoded({extended:true }))
@@ -25,7 +27,7 @@ app.use('/api/user',routerClient)
 app.use(errorHandler)
 
 
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 3001
  app.listen(port,(err)=>{
     if(!err){
     console.log(`server running on port ${port}`)
