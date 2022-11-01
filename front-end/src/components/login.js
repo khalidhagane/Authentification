@@ -18,19 +18,22 @@ function Login() {
 
     await axios.post(API_URL, user)
       .then(res => {
-        if (res.status === 200) {
+       
+        // if (res.status === 201) {
           
+          console.log(" page profile")
           return navigate("/profile");
 
-          // console.log(res)
-        }
+        // //   // console.log(res)
+        // }
         // console.log(res);
-        
+        // console.log("hhhhh")
         // setMessage(Resporesnse.data.message);
       })
       .catch(err => {
-        console.log(err.response.data);
+        console.log(err.response.data.message);
         // setMessage(err.response.data.message);
+        // console.log("gggggggggggggg")
       })
 
   }

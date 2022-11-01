@@ -20,45 +20,37 @@ const createToken = (id) =>{
 //method post 
 // url : /api/auth/login
 // acess : public
-const Login = asyncHandler(async (req,res) => {
+const Login = asyncHandler(async (req,res, next) => {
     try {
         const{ email,password}= req.body
-        const findUser = await User.findOne({ email : email})
+        if(!email || !password){
+            res.status(400)
+            next(new Error('Please add all fields'))
+        }
+        const findUser = await User.findOne({ email : email })
+
         if(findUser){
-            const match = await bcryptjs.compare(password, findUser.password)
-            if (match) {
-                //create token 
-                const token = createToken(findUser.id)
-                // start token in cookie 
-                res
+                const match = await bcryptjs.compare(password, findUser.password)
+                if(match) {
+                    const token = createToken(findUser.id)
+                    return res
                     .cookie('access-token',token)
                     .send('logged in succefully')
-                    
-                console.log('logged in succefully')
-            } else {
-                console.log('password incorrect')
-                res.send('password incorrect')
-                res
-            }
-        }
-        else{
-            console.log('user not regestered')
+                }
+
+                res.status(400)
+                return next({ message: "password not correct"})
+
+        } else{
+            // console.log('user not regestered')
+            res.status(400) 
+            return next({message:"email not right"})
+
         }
     } catch (err) {
         console.log(err)
     }
-    
-    // ---------------- partie handler error ------------------
-        const {email , password, name }= req.body
-    
-        if(!email || !password){
-            res.status(400)
-            throw new Error('Please add all fields ')
-        }
-        else {
-            res.status(200).json({mssage:'les inpots is valid'})
-        }
-    // ---------------- partie handler error ------------------
+   
     })
 
 //method post 
