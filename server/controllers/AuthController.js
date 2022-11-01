@@ -38,6 +38,7 @@ const Login = asyncHandler(async (req,res) => {
             } else {
                 console.log('password incorrect')
                 res.send('password incorrect')
+                
             }
         }
         else{
