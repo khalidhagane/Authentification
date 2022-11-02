@@ -2,10 +2,13 @@ import React from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+
+
 import Login from './components/login'
 import Register from './components/Register'
 import NotFound from './components/NotFound'
 import Profile from './components/Profile'
+
 
 
 function App() {
@@ -33,7 +36,10 @@ function App() {
 
         <div className="auth-wrapper">
             <div className="auth-inner">
+
+              
               <Routes>
+                
                 <Route path="/" element={<Login />} />
                 <Route path="/sign-in" element={<Login />} />
                 <Route path="/register" element={<Register />} />

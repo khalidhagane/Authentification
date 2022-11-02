@@ -32,6 +32,7 @@ const Login = asyncHandler(async (req,res, next) => {
         if(findUser){
                 const match = await bcryptjs.compare(password, findUser.password)
                 if(match) {
+                    
                     const token = createToken(findUser.id)
                     return res
                     .cookie('access-token',token)
@@ -62,6 +63,7 @@ const Regester = asyncHandler(async (req,res) => {
     if(!email || !password || !name || !role){
         res.status(400)
         throw new Error('Please add all fields ')
+        // return next({message:"Please add all fields"})
     }
 
     // check if user exists
@@ -69,7 +71,9 @@ const Regester = asyncHandler(async (req,res) => {
     const roles = await Role.findOne({role})
     console.log(roles)
     if(authExists){
-        res.status(400).send("user already exist")
+        // res.status(400).send("user already exist")
+        res.status(400)
+        throw new Error('user already exist ')
     }
     //hash password
     const salt = await bcryptjs.genSalt(10)
@@ -95,7 +99,7 @@ const Regester = asyncHandler(async (req,res) => {
         res.status(400)
         throw new Error('Invalid user data')
     }
-   
+
 })
 
 //------------ function verification
