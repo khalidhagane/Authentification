@@ -25,18 +25,24 @@ const Login = asyncHandler(async (req,res, next) => {
         const{ email,password}= req.body
         if(!email || !password){
             res.status(400)
-            next(new Error('Please add all fields'))
+            return next({message:"Please add all fields"})
         }
         const findUser = await User.findOne({ email : email })
 
-        if(findUser){
+        if(findUser){ 
+
                 const match = await bcryptjs.compare(password, findUser.password)
                 if(match) {
+                    if(findUser.status==false){
+                        res.status(400)
+                        next(new Error('verify validation email'))
+                    }else{
                     
-                    const token = createToken(findUser.id)
-                    return res
-                    .cookie('access-token',token)
-                    .send('logged in succefully')
+                        const token = createToken(findUser.id)
+                        return res
+                        .cookie('access-token',token)
+                        .send('logged in succefully')
+                    }
                 }
 
                 res.status(400)
@@ -46,8 +52,8 @@ const Login = asyncHandler(async (req,res, next) => {
             // console.log('user not regestered')
             res.status(400) 
             return next({message:"email not right"})
+            }
 
-        }
     } catch (err) {
         console.log(err)
     }
