@@ -20,7 +20,7 @@ function Login() {
       password
     } 
 
-    await axios.post(API_URL, user)
+    await axios.post(API_URL, user,{withCredentials:true})
       .then(res => {
           console.log(" page profile")
           return navigate("/profile");

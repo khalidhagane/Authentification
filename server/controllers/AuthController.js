@@ -39,9 +39,12 @@ const Login = asyncHandler(async (req,res, next) => {
                     }else{
                     
                         const token = createToken(findUser.id)
+                        
                         return res
                         .cookie('access-token',token)
                         .send('logged in succefully')
+
+                        
                     }
                 }
 
