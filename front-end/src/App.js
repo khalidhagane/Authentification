@@ -9,6 +9,8 @@ import NotFound from './components/NotFound'
 import Profile from './components/Profile'
 import Marhaba from './components/Marhaba'
 import Layout from './components/Layout'
+import Forgot from './components/Forgot';
+
 
 
 export default function App() {
@@ -23,6 +25,7 @@ export default function App() {
                 <Route path="/sign-in" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/forgot" element={<Forgot />} />
                 <Route path="/*" element={<NotFound />} />
                 </Route>
               </Routes>

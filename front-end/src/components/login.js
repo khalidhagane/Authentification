@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+// import { Outlet, Link } from "react-router-dom";
 
 
 
@@ -55,7 +56,7 @@ function Login() {
           <button type="submit" className="btn btn-primary"> Submit </button>
         </div>
         <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
+          Forgot <Link  to={'/forgot'}>password?</Link>
         </p>
       </form>
     )

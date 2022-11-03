@@ -45,7 +45,6 @@ const Login = asyncHandler(async (req,res, next) => {
                         
                     }
                 }
-
                 res.status(400)
                 return next({ message: "password not correct"})
 
@@ -127,17 +126,30 @@ const verificationEmail = async (req,res)=>{
 //method post 
 // url : /api/auth/Forgetpassword
 // acess : public
-const Forgetpassword = async (req,res) => {
+const Forgetpassword = async (req,res,next) => {
+    // const {email }= req.body
+    try {
+
     const {email}= req.body
+    if(!email){
+        res.status(400)
+        return next({message:"Please add email"})
+    }
+    
     const user = await User.findOne({email})
-    if(!user)return res.status(400).json({err: 'Please add email'})
-    const token = createToken(user.id)
-    // console.log(token)
-    try{
-        sendEmailPassword(user.email, token)
-        res.send('mail sent succefully')
-    } catch(error) {
-        console.log(error)
+    if(!user){
+         res.status(400)
+        // .json({err: 'email non exit'})
+        return next({message:"email non exit"})
+    }
+    else{
+        const token = createToken(user.id)
+        console.log(token)
+    }
+   
+}
+     catch(err) {
+        console.log(err)
     }
 }
 
