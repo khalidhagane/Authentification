@@ -1,57 +1,37 @@
 import React from 'react'
+import ReactDOM from "react-dom/client";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Login from './components/login'
 import Register from './components/Register'
 import NotFound from './components/NotFound'
 import Profile from './components/Profile'
 import Marhaba from './components/Marhaba'
+import Layout from './components/Layout'
 
 
-
-
-function App() {
+export default function App() {
   return (
     <Router>
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-            <div className="container">
-                <Link className="navbar-brand" to={'/'}>Marhaba</Link>
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                          <Link className="nav-link" to={'/sign-in'}>Login</Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link className="nav-link" to={'/register'}>Sign up</Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link className="nav-link" to={'/profile'}>Profile</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div className="auth-wrapper">
-            <div className="auth-inner">
-
+    
+      {/* <div className="App"> */}
               
               <Routes>
-                
-                <Route path="/" element={<Marhaba />} />
+                <Route  path="/" element={<Layout />}>
+                <Route path="/marhaba" element={<Marhaba />} />
                 <Route path="/sign-in" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/*" element={<NotFound />} />
+                </Route>
               </Routes>
-            </div>
-        </div>
-      </div>
+           
+      {/* </div> */}
+   
     </Router>
   )
 }
-export default App
+// export default App
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
