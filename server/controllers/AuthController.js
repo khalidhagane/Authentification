@@ -129,7 +129,6 @@ const verificationEmail = async (req,res)=>{
 const Forgetpassword = async (req,res,next) => {
     // const {email }= req.body
     try {
-
     const {email}= req.body
     if(!email){
         res.status(400)
@@ -145,6 +144,8 @@ const Forgetpassword = async (req,res,next) => {
     else{
         const token = createToken(user.id)
         console.log(token)
+        res.status(400)
+        return next({message:"check email valid password"})
     }
    
 }
