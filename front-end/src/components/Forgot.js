@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 
 function Forgot() {
@@ -22,8 +24,8 @@ function Forgot() {
     await axios.post(API_URL, user)
 
         .then(res => {
-            console.log(" page profile")
-            return navigate("/profile");
+            console.log("virefier email")
+            
           
         })
         .catch(err => {
@@ -43,7 +45,8 @@ function Forgot() {
           </div>
           
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary"> Submit </button>
+            <button type="submit"  className="btn btn-primary"> Submit </button>
+            {/* <Link  className="btn btn-primary " type="submit" to={'/api/auth/resetpassword/:token'}>Submit</Link> */}
           </div>
           
         </form>

@@ -10,6 +10,8 @@ import Profile from './components/Profile'
 import Marhaba from './components/Marhaba'
 import Layout from './components/Layout'
 import Forgot from './components/Forgot';
+import Reset from './components/Reset';
+
 
 
 
@@ -26,6 +28,9 @@ export default function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/forgot" element={<Forgot />} />
+                {/* <Route path="/reset" element={<Reset />} /> */}
+                <Route path='/reset/:token' element={ <Reset/> } />
+
                 <Route path="/*" element={<NotFound />} />
                 </Route>
               </Routes>
