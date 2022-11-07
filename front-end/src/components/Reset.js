@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate,Link, useParams } from 'react-router-dom';
 
 function Reset() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const {token} = useParams()
     const [password, setPassword] = useState('')
     const [confpassword, setConfpassword] = useState('')
@@ -22,6 +22,7 @@ function Reset() {
     await axios.post(API_URL, user)
       .then(res => {
           console.log(" password updated")
+          return navigate("/sign-in");
       })
       .catch(err => {
         console.log(err.response.data);
@@ -35,7 +36,7 @@ function Reset() {
         {message && <div className='text-danger alert alert-danger mt-5 w-100 py-1 text-center border border-2 border-danger'> {message}</div>}
         <div className="mb-3">
           <label>Password</label>
-          <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" />
+          <input type="password" className="form-control " value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" />
         </div>
         <div className="mb-3">
           <label>Password</label>

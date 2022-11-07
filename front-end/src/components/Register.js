@@ -1,15 +1,21 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-// 
+// import Select from 'react-select'
+
 function Register() {
   
+  // const options = [
+  //   { value: 'client', label: 'client' },
+  //   { value: 'manager', label: 'manager' },
+  //   { value: 'livreur', label: 'livreur' }
+  // ]
 
   const navigate = useNavigate();
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
+  // const [role, setRole] = useState('')
   const [message,setMessage] = useState(false);
 
   // const [message,setMessage] = useState(false);
@@ -21,7 +27,7 @@ function Register() {
       name,
       email,
       password,
-      role
+        
     }
     await axios.post(API_URL, user)
       .then(res => {
@@ -56,10 +62,11 @@ function Register() {
         <label>Password</label>
         <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password"  />
       </div>
-      <div className="mb-3">
-        <label>Role</label>
-        <input type="text" className="form-control" value={role} onChange={(e) => setRole(e.target.value)} placeholder="enter Your role"  />
-      </div>
+      {/* <div className="mb-3">
+      <Select options={options}  /> */}
+        {/* <label>Role</label> */}
+        {/* <input type="text" className="form-control" value={role} onChange={(e) => setRole(e.target.value)} placeholder="enter Your role"  /> */}
+      {/* </div> */}
       <div className="d-grid">
         <button type="submit" className="btn btn-primary" > Sign Up </button>
       </div>

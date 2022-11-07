@@ -26,6 +26,7 @@ function Forgot() {
         .then(res => {
             console.log("virefier email")
             
+            
           
         })
         .catch(err => {

@@ -28,8 +28,8 @@ export default function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/forgot" element={<Forgot />} />
-                {/* <Route path="/reset" element={<Reset />} /> */}
-                <Route path='/reset/:token' element={ <Reset/> } />
+                <Route path="/reset" element={<Reset />} />
+                <Route path='/reset/:token' element={ <Reset /> } />
 
                 <Route path="/*" element={<NotFound />} />
                 </Route>
