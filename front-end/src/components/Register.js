@@ -33,10 +33,8 @@ function Register() {
       .then(res => {
         if (res.status === 201) {
           return navigate("/sign-in");
-          // console.log(res)
+          
         }
-        // console.log(res);
-        // setMessage(Resporesnse.data.message);
       })
       .catch(err => {
         console.log(err.response.data);

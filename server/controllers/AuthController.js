@@ -150,10 +150,10 @@ const Forgetpassword = async (req,res,next) => {
         //  res.json({
         //     khalid:true
         //  })
-
+        
          res.status(400) 
             return next({message:"check email pour valid password"})
-         
+        
     }
     
 }
@@ -168,11 +168,17 @@ const Forgetpassword = async (req,res,next) => {
 const Resetpassword =  asyncHandler ( async (req,res) => {
     
         
-    const {password} = req.body
-    if(!password){
+    const {password,confpassword} = req.body
+    // console.log('password', password)
+    // console.log('confpassword', confpassword)
+    if(!password || !confpassword){
         res.status(400)
         // .json({err: 'email non exit'})
-        throw new Error('Please add all password ')
+        throw new Error('Please add password ')
+    }else if(password != confpassword){
+        res.status(400)
+        // .json({err: 'email non exit'})
+        throw new Error('password not match ')
     }
     
     const token =  req.params.token
