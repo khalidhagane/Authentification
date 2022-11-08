@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate,Link } from 'react-router-dom';
+
 // import { Outlet, Link } from "react-router-dom";
 
 
@@ -35,7 +36,8 @@ function Login() {
   }
   
     return (
-      <form onSubmit={registerUser}>
+      
+      <form className="auth-inner" onSubmit={registerUser}>
         <h3>Sign In</h3>
         {message && <div className='text-danger alert alert-danger mt-5 w-100 py-1 text-center border border-2 border-danger'> {message}</div>}
         <div className="mb-3">
@@ -59,6 +61,7 @@ function Login() {
           Forgot <Link  to={'/forgot'}>password?</Link>
         </p>
       </form>
+      
     )
   }
   export default Login 

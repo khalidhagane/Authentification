@@ -18,25 +18,24 @@ import Reset from './components/Reset';
 export default function App() {
   return (
     <Router>
-    
-      {/* <div className="App"> */}
-              
-              <Routes>
-                <Route  path="/" element={<Layout />}>
-                <Route path="/marhaba" element={<Marhaba />} />
-                <Route path="/sign-in" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/forgot" element={<Forgot />} />
-                <Route path="/reset" element={<Reset />} />
-                <Route path='/reset/:token' element={ <Reset /> } />
 
-                <Route path="/*" element={<NotFound />} />
-                </Route>
-              </Routes>
-           
+      {/* <div className="App"> */}
+
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Marhaba />} />
+          <Route path="/sign-in" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route path='/reset/:token' element={<Reset />} />
+        </Route>
+          <Route path="/*" element={<NotFound />} />
+      </Routes>
+
       {/* </div> */}
-   
+
     </Router>
   )
 }

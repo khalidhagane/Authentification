@@ -37,7 +37,7 @@ function Forgot() {
     }
     
       return (
-        <form onSubmit={registerUser}>
+        <form className="auth-inner" onSubmit={registerUser}>
           <h3>Forget password</h3>
           {message && <div className='text-danger alert alert-danger mt-5 w-100 py-1 text-center border border-2 border-danger'> {message}</div>}
           <div className="mb-3">

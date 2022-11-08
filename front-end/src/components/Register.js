@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+
 // import Select from 'react-select'
 
 function Register() {
-  
+
   // const options = [
   //   { value: 'client', label: 'client' },
   //   { value: 'manager', label: 'manager' },
@@ -44,7 +45,7 @@ function Register() {
   }
 
   return (
-    <form onSubmit={registerUser}>
+    <form className="auth-inner" onSubmit={registerUser} >
       <h3>Sign Up</h3>
       {message && <div className='text-danger alert alert-danger mt-5 w-100 py-1 text-center border border-2 border-danger'> {message}</div>}
 
@@ -68,9 +69,12 @@ function Register() {
       <div className="d-grid">
         <button type="submit" className="btn btn-primary" > Sign Up </button>
       </div>
-      <p className="forgot-password text-right">
+      {/* <p className="forgot-password text-right">
         Already registered <a href="/sign-in">sign in?</a>
-      </p>
+      </p> */}
+       <p className="forgot-password text-right">
+       Already registered  <Link  to={'/sign-in'}>sign in?</Link>
+        </p>
     </form>
   )
 }

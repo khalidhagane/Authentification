@@ -173,11 +173,9 @@ const Resetpassword =  asyncHandler ( async (req,res) => {
     // console.log('confpassword', confpassword)
     if(!password || !confpassword){
         res.status(400)
-        // .json({err: 'email non exit'})
         throw new Error('Please add password ')
     }else if(password != confpassword){
         res.status(400)
-        // .json({err: 'email non exit'})
         throw new Error('password not match ')
     }
     
