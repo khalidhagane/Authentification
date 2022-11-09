@@ -9,22 +9,17 @@ import NotFound from './components/NotFound'
 import Profile from './components/Profile'
 import Marhaba from './components/Marhaba'
 import Layout from './components/Layout'
-import Forgot from './components/Forgot';
-import Reset from './components/Reset';
-
-
-
+import Forgot from './components/ForgotPassword';
+import Reset from './components/ResetPassword';
 
 export default function App() {
   return (
     <Router>
-
       {/* <div className="App"> */}
-
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Marhaba />} />
-          <Route path="/sign-in" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/forgot" element={<Forgot />} />
@@ -33,9 +28,7 @@ export default function App() {
         </Route>
           <Route path="/*" element={<NotFound />} />
       </Routes>
-
       {/* </div> */}
-
     </Router>
   )
 }

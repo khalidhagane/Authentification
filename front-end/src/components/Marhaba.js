@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Nav from './Nav';
+// import Nav from './Nav';
 
 
 function Marhaba() {
   return (
+    <div>
+      
     <article className="auth-inner">
       
             <h1>Bienvenido a Invbox </h1>
@@ -14,7 +16,9 @@ function Marhaba() {
                </div>
           
       </article>
+      </div>
   )
+  
 }
 
 export default Marhaba

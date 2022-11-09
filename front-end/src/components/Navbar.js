@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-function Nav() {
+function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top">
     <div className="container">
@@ -9,7 +9,7 @@ function Nav() {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                <Link className="nav-link" to={'/sign-in'}>Login</Link>
+                <Link className="nav-link" to={'/login'}>Login</Link>
                 </li>
                 <li className="nav-item">
                 <Link className="nav-link" to={'/register'}>Sign up</Link>
@@ -24,4 +24,4 @@ function Nav() {
   )
 }
 
-export default Nav
+export default Navbar

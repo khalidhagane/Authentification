@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate,Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Submit from './Submit';
+
 
 function Reset() {
     const navigate = useNavigate();
@@ -50,9 +52,10 @@ function Reset() {
           <label>Password</label>
           <input type="password" className="form-control " id='pass2'  value={confpassword} onChange={(e) => setConfpassword(e.target.value)} placeholder="To confirm password " />
         </div>
-        <div className="d-grid">
+        {/* <div className="d-grid">
           <button type="submit" className="btn btn-primary"> Submit </button>
-        </div>
+        </div> */}
+        <Submit/>
         
       </form>
   )

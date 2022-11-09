@@ -1,17 +1,12 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate,Link } from 'react-router-dom';
-
+import Submit from './Submit';
 // import Select from 'react-select'
 
 function Register() {
 
-  // const options = [
-  //   { value: 'client', label: 'client' },
-  //   { value: 'manager', label: 'manager' },
-  //   { value: 'livreur', label: 'livreur' }
-  // ]
-
+ 
   const navigate = useNavigate();
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -66,9 +61,10 @@ function Register() {
         {/* <label>Role</label> */}
         {/* <input type="text" className="form-control" value={role} onChange={(e) => setRole(e.target.value)} placeholder="enter Your role"  /> */}
       {/* </div> */}
-      <div className="d-grid">
+      {/* <div className="d-grid">
         <button type="submit" className="btn btn-primary" > Sign Up </button>
-      </div>
+      </div> */}
+      <Submit/>
       {/* <p className="forgot-password text-right">
         Already registered <a href="/sign-in">sign in?</a>
       </p> */}

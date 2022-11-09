@@ -1,13 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
-
-
+// import { useNavigate } from 'react-router-dom';
+// import { Link } from "react-router-dom";
+import Submit from './Submit';
 
 function Forgot() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [email, setEmail] = useState('')
     
     const [message,setMessage] = useState(false);
@@ -45,10 +44,11 @@ function Forgot() {
             <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
           </div>
           
-          <div className="d-grid">
+          {/* <div className="d-grid">
             <button type="submit"  className="btn btn-primary"> Submit </button>
-            {/* <Link  className="btn btn-primary " type="submit" to={'/api/auth/resetpassword/:token'}>Submit</Link> */}
-          </div>
+            
+          </div> */}
+          <Submit/>
           
         </form>
       )
