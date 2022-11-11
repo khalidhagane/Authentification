@@ -26,7 +26,7 @@ function Login() {
     await axios.post(API_URL, user,{withCredentials:true})
       .then(res => {
           console.log(" page profile")
-          return navigate("/profile");
+          // return navigate("/profile");
         
       })
       .catch(err => {

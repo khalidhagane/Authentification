@@ -7,10 +7,7 @@ function Layout() {
     <div className="App">
        <Navbar/>
         <div className="auth-wrapper">
-        {/* <div className="auth-inner"> */}
-        
         <Outlet/>
-        {/* </div> */}
         </div>
     </div>
   )

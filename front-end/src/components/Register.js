@@ -28,7 +28,7 @@ function Register() {
     await axios.post(API_URL, user)
       .then(res => {
         if (res.status === 201) {
-          return navigate("/sign-in");
+          return navigate("/login");
           
         }
       })
@@ -69,7 +69,7 @@ function Register() {
         Already registered <a href="/sign-in">sign in?</a>
       </p> */}
        <p className="forgot-password text-right">
-       Already registered  <Link  to={'/sign-in'}>sign in?</Link>
+       Already registered  <Link  to={'/login'}>sign in?</Link>
         </p>
     </form>
   )

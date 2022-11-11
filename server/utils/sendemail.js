@@ -22,6 +22,7 @@ const sendemail = (email,token) => {
     
     try {
         mailTransporter.sendMail(mailDetails)
+        
     } catch (error) {
         console.log(error)
     }

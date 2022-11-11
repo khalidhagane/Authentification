@@ -27,7 +27,8 @@ const Login = asyncHandler(async (req,res, next) => {
             res.status(400)
             return next({message:"Please add all fields"})
         }
-        const findUser = await User.findOne({ email : email })
+        const findUser = await User.findOne({ email : email }).populate("role")
+        // console.log(findUser.role)
 
         if(findUser){ 
 
@@ -37,15 +38,16 @@ const Login = asyncHandler(async (req,res, next) => {
                         res.status(400)
                         next(new Error('verify validation email'))
                     }else{
-                    
+                        // console.log(findUser.role)
                         const token = createToken(findUser.id)
                         return res
+                        .cookie('myrole', findUser.role)
                         .cookie('access-token',token)
                         .send('logged in succefully')
+                        // .console.log(localStorage.setItem('myrole', findUser.role))
                         
                     }
                 }
-
                 res.status(400)
                 return next({ message: "password not correct"})
 
@@ -58,7 +60,7 @@ const Login = asyncHandler(async (req,res, next) => {
     } catch (err) {
         console.log(err)
     }
-   
+
     })
 
 //method post 
@@ -106,7 +108,6 @@ const Regester = asyncHandler(async (req,res) => {
         res.status(400)
         throw new Error('Invalid user data')
     }
-
 })
 
 //------------ function verification
@@ -116,7 +117,9 @@ const verificationEmail = async (req,res)=>{
     if(user){
         user.token = null
         user.status = true
-        await user.save();
+        await user.save()
+        
+        res.status(201).send('verification valid ')
         
     } 
     else{
@@ -190,10 +193,8 @@ const Resetpassword =  asyncHandler ( async (req,res) => {
         {_id : userid.id},
         {password : hashPassword}
         
-
     )
     
-
     res.status(200)
     .json({mess : 'password has update successfuly'})
     

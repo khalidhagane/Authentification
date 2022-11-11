@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom';
 function Marhaba() {
   return (
     <div>
-      
+      {}
     <article className="auth-inner">
+
       
             <h1>Bienvenido a Invbox </h1>
                <div className="d-grid">
-                 <Link to="/sign-in"  className="forgot-password text-right btn btn-primary ">Login</Link>
+                 <Link to="/login"  className="forgot-password text-right btn btn-primary ">Login</Link>
                  <Link to="/register" className="forgot-password text-right btn btn-primary ">Registr</Link>
                </div>
           

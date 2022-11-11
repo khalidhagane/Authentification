@@ -11,7 +11,7 @@ const checkRoleClient = async (req,res,next)=> {
         const users = await User.findOne({_id : validatetoken.id})
         // console.log(validatetoken.id);
         const roles = await Role.findOne({_id : users.role})
-    // console.log(roles.role);
+    // console.log(populate("role"));
         if(roles.role !== 'client'){
             res.send('access denied')
         }
