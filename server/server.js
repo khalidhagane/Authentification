@@ -12,7 +12,7 @@ app.use(cookie())
 app.use(express.json())
 app.use(express.urlencoded({extended:true }))
 connectDB();
-
+ 
 
 const router = require('./routers/authRoute')
 const routerManager =  require('./routers/managerRoute')

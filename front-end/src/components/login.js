@@ -1,13 +1,17 @@
-import { useState } from 'react'
+import { useContext, useState  } from 'react'
 import axios from 'axios'
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link, useLocation} from 'react-router-dom';
 import Submit from './Submit';
-
+import useAuth from '../hooks/useAuth'
 // import { Outlet, Link } from "react-router-dom";
 
 
 
 function Login() {
+
+  const {setAuth} = useAuth()
+  const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
   const navigate = useNavigate();
   const [email, setEmail] = useState('')
@@ -26,7 +30,8 @@ function Login() {
     await axios.post(API_URL, user,{withCredentials:true})
       .then(res => {
           console.log(" page profile")
-          // return navigate("/profile");
+          setAuth({email,password})
+          navigate(from, { replace: true });
         
       })
       .catch(err => {
@@ -47,7 +52,7 @@ function Login() {
         </div>
         <div className="mb-3">
           <label>Password</label>
-          <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" />
+          <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" autoComplete="on"/>
         </div>
         <div className="mb-3">
           <div className="custom-control custom-checkbox">

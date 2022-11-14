@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 function Layout() {
   return (
-    <div className="App">
+    <div className="App" style={{height : '100wh'}}>
        <Navbar/>
         <div className="auth-wrapper">
         <Outlet/>

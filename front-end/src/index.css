@@ -4,6 +4,10 @@
 }
 body {
   background: #1C8EF9 !important;
+  /* background-image: url("./img/home.jpg"); */
+  /* background-size: contain; */
+  /* background-size: cover;   */
+  /* background-repeat: no-repeat; */
   min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -28,7 +32,7 @@ body, html, .App, #root, .auth-wrapper {
   text-align: left;
 }
 .auth-inner {
-  width: 450px;
+  width: 480px;
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
@@ -70,3 +74,22 @@ body, html, .App, #root, .auth-wrapper {
   line-height: 0;
 }
 
+.custom-shape-divider-bottom-1668269310 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom-1668269310 svg {
+  position: relative;
+  display: block;
+  width: calc(164% + 1.3px);
+  height: 359px;
+}
+
+.custom-shape-divider-bottom-1668269310 .shape-fill {
+  fill: #ffffffbf;
+}
