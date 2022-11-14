@@ -17,6 +17,7 @@ import Reset from './components/ResetPassword';
 import Manager from './components/Manager';
 import Livreur from './components/Livreur';
 import Client from './components/Client';
+import Notaccess from './components/Notaccess';
 
 
 export default function App() {
@@ -27,17 +28,29 @@ export default function App() {
         <Route path="/" element={<Marhaba />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/notaccess" element={< Notaccess />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/reset" element={<Reset />} />
         <Route path='/reset/:token' element={<Reset />} />
       </Route>
 
-      <Route element={<RequireAuth />}>
+      <Route element={<RequireAuth Roles={"client"} />} >
         <Route path="/profile" element={<Profile />} />
-        <Route path="/manager" element={<Manager />} />
-        <Route path="/livreur" element={<Livreur />} />
-        <Route path="/client" element={<Client />} />
+      </Route>
 
+      <Route element={<RequireAuth Roles={"client"}/>} >
+        <Route path="/client" element={<Client />} />
+        <Route path="/profile" element={<Profile />} />
+      </Route>
+
+      <Route element={<RequireAuth Roles={"livreur"}/>} >
+        <Route path="/livreur" element={<Livreur />} />
+        <Route path="/profile" element={<Profile />} />
+      </Route>
+
+      <Route element={<RequireAuth Roles={"manager"}/>} >
+        <Route path="/manager" element={<Manager />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
 
       <Route path="/*" element={<NotFound />} />

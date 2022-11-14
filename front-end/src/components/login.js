@@ -11,7 +11,7 @@ function Login() {
 
   const {setAuth} = useAuth()
   const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/profile";
 
   const navigate = useNavigate();
   const [email, setEmail] = useState('')
@@ -30,7 +30,11 @@ function Login() {
     await axios.post(API_URL, user,{withCredentials:true})
       .then(res => {
           console.log(" page profile")
-          setAuth({email,password})
+          const roles = res.data.role.role
+          // const name = res.data.name
+          // console.log(roles);
+          // console.log(name);
+          setAuth({email,password,roles})
           navigate(from, { replace: true });
         
       })

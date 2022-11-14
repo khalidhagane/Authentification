@@ -36,7 +36,7 @@ const Login = asyncHandler(async (req,res, next) => {
                 if(match) {
                     if(findUser.status==false){
                         res.status(400)
-                        next(new Error('verify validation email'))
+                        next(new Error('verify email pour validation'))
                     }else{
                         // console.log(findUser.role)
                         const token = createToken(findUser.id)
