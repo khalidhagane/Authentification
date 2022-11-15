@@ -40,7 +40,9 @@ function Login() {
           // console.log(myRole)
           
           setAuth({email,password,roles})
-          navigate(from, { replace: true });
+          window.location.href = "/";
+          // navigate(from, { replace: true });
+          
       })
       .catch(err => {
         console.log(err.response.data);
