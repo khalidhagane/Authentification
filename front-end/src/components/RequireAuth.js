@@ -10,13 +10,24 @@ const RequireAuth = ({Roles}) => {
     if(!(auth.roles && auth.email)){
         return <Navigate to="/login" state={{ from: location }} replace />
     }
-    return (
+    console.log(auth.email);
+    
+    if(auth.roles.find(role => Roles.includes(role))) {
+        return <Outlet />
+    } else if(auth?.email) {
+        return <Navigate to="Notaccess" state={{ from: location }} replace />
+    } else {
+        <Navigate to="/login" state={{ from: location }} replace />
+    }
+    // return (
 
-        auth.roles.find(role => Roles.includes(role))
-            ? <Outlet />
-            : auth?.email
-                ? <Navigate to="Notaccess" state={{ from: location }} replace />
-                : <Navigate to="/login" state={{ from: location }} replace />
-    );
+    //     auth.roles.find(role => Roles.includes(role))
+    //         ? <Outlet />
+            
+    //         : auth?.email
+            
+    //             ? <Navigate to="Notaccess" state={{ from: location }} replace />
+    //             : <Navigate to="/login" state={{ from: location }} replace />
+    // );
 }
 export default RequireAuth;  

@@ -34,23 +34,23 @@ export default function App() {
         <Route path='/reset/:token' element={<Reset />} />
       </Route>
 
-      <Route element={<RequireAuth Roles={"client"} />} >
+      <Route element={<RequireAuth Roles={["client","manager","livreur"]} />} >
         <Route path="/profile" element={<Profile />} />
       </Route>
 
       <Route element={<RequireAuth Roles={"client"}/>} >
         <Route path="/client" element={<Client />} />
-        <Route path="/profile" element={<Profile />} />
+        
       </Route>
 
       <Route element={<RequireAuth Roles={"livreur"}/>} >
         <Route path="/livreur" element={<Livreur />} />
-        <Route path="/profile" element={<Profile />} />
+        
       </Route>
 
       <Route element={<RequireAuth Roles={"manager"}/>} >
         <Route path="/manager" element={<Manager />} />
-        <Route path="/profile" element={<Profile />} />
+        
       </Route>
 
       <Route path="/*" element={<NotFound />} />

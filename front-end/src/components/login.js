@@ -11,7 +11,7 @@ function Login() {
 
   const {setAuth} = useAuth()
   const location = useLocation();
-    const from = location.state?.from?.pathname || "/profile";
+    const from = location.state?.from?.pathname || "/";
 
   const navigate = useNavigate();
   const [email, setEmail] = useState('')
@@ -36,6 +36,7 @@ function Login() {
           // console.log(name);
           setAuth({email,password,roles})
           navigate(from, { replace: true });
+        
         
       })
       .catch(err => {
