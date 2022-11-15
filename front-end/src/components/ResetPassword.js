@@ -4,7 +4,6 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom';
 import Submit from './Submit';
 
-
 function Reset() {
     const navigate = useNavigate();
     const {token} = useParams()
@@ -18,7 +17,6 @@ function Reset() {
     const API_URL = `http://localhost:8081/api/auth/Resetpassword/${token}`
     const user = {
       
-      
       password ,
       confpassword ,
     } 
@@ -26,13 +24,8 @@ function Reset() {
     await axios.post(API_URL, user)
       .then(res => {
           console.log(" password updated")
-          // if(password===confpassword){
-          return navigate("/sign-in");
-        // }else{
-        //   console.log("pass1 defirent pass 2")
-        //   // const mssConfPassword= 'plaese confirmer password'
-
-        // }
+          return navigate("/login");
+        
       })
       .catch(err => {
         console.log(err.response.data);
@@ -52,14 +45,10 @@ function Reset() {
           <label>Password</label>
           <input type="password" className="form-control " id='pass2'  value={confpassword} onChange={(e) => setConfpassword(e.target.value)} placeholder="To confirm password " />
         </div>
-        {/* <div className="d-grid">
-          <button type="submit" className="btn btn-primary"> Submit </button>
-        </div> */}
         <Submit/>
         
       </form>
   )
-  
   
 }
 

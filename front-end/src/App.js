@@ -5,7 +5,6 @@ import { Routes, Route } from 'react-router-dom'
 
 import RequireAuth from './components/RequireAuth'
 
-
 import Login from './components/login'
 import Register from './components/Register'
 import NotFound from './components/NotFound'
@@ -18,7 +17,6 @@ import Manager from './components/Manager';
 import Livreur from './components/Livreur';
 import Client from './components/Client';
 import Notaccess from './components/Notaccess';
-
 
 export default function App() {
   return (
@@ -40,17 +38,14 @@ export default function App() {
 
       <Route element={<RequireAuth Roles={"client"}/>} >
         <Route path="/client" element={<Client />} />
-        
       </Route>
 
       <Route element={<RequireAuth Roles={"livreur"}/>} >
         <Route path="/livreur" element={<Livreur />} />
-        
       </Route>
 
       <Route element={<RequireAuth Roles={"manager"}/>} >
         <Route path="/manager" element={<Manager />} />
-        
       </Route>
 
       <Route path="/*" element={<NotFound />} />

@@ -41,7 +41,7 @@ const Login = asyncHandler(async (req,res, next) => {
                         // console.log(findUser.role)
                         const token = createToken(findUser.id)
                         return res
-                        // .cookie('myrole', findUser.role)
+                        .cookie('myrole', findUser.role)
                         .cookie('access-token',token)
                         .status(201).json({
                             id : findUser.id,
@@ -50,7 +50,7 @@ const Login = asyncHandler(async (req,res, next) => {
                             role: findUser.role,
                             message : 'login successfuly'
                         })
-                        // .console.log(localStorage.setItem('myrole', findUser.role))
+                        // .console.log(cookie('myrole', findUser.role))
                         
                     }
                 }

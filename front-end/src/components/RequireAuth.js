@@ -2,32 +2,27 @@
 import React from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Notaccess from "./Notaccess";
+
 
 const RequireAuth = ({Roles}) => {
-    const { auth } = useAuth();
+    // const { auth } = useAuth();
+    const role = localStorage.getItem("role")
+    const email = localStorage.getItem('email')
+    console.log(role);
     const location = useLocation();
-    console.log(auth.roles)
-    if(!(auth.roles && auth.email)){
+    // console.log(auth.myRole+"aaaaaaa")
+
+
+    if (!(role && email)) {
         return <Navigate to="/login" state={{ from: location }} replace />
     }
-    console.log(auth.email);
-    
-    if(auth.roles.find(role => Roles.includes(role))) {
-        return <Outlet />
-    } else if(auth?.email) {
-        return <Navigate to="Notaccess" state={{ from: location }} replace />
-    } else {
-        <Navigate to="/login" state={{ from: location }} replace />
-    }
-    // return (
 
-    //     auth.roles.find(role => Roles.includes(role))
-    //         ? <Outlet />
-            
-    //         : auth?.email
-            
-    //             ? <Navigate to="Notaccess" state={{ from: location }} replace />
-    //             : <Navigate to="/login" state={{ from: location }} replace />
-    // );
+    if (Roles.indexOf(role) < 0) {
+        return <Notaccess />;
+    }
+
+
+    return <Outlet />;
 }
 export default RequireAuth;  
