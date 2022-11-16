@@ -17,6 +17,7 @@ import Manager from './components/Manager';
 import Livreur from './components/Livreur';
 import Client from './components/Client';
 import Notaccess from './components/Notaccess';
+import Logout from './components/Logout';
 
 export default function App() {
   return (
@@ -27,6 +28,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/notaccess" element={< Notaccess />} />
+        <Route path="/logout" element={<Logout />} />
+
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/reset" element={<Reset />} />
         <Route path='/reset/:token' element={<Reset />} />

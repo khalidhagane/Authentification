@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Marhaba() {
   return (
     < >
-    <div className='d-flex justify-content-around align-items-center'>
+    <div className='d-flex justify-content-around align-items-center flex-wrap'>
       <div>
         <img className='notfound' src={window.location.origin + '/img/home.png'} alt="logoMarhaba" />
       </div>

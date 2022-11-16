@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 function Navbar() {
   const role = localStorage.getItem("role")
     const email = localStorage.getItem('email')
-    console.log(role);
-    console.log(email);
+    // console.log(role);
+    // console.log(email);
 
   return (
     
@@ -17,7 +17,7 @@ function Navbar() {
             { 
             email?
               <li className="nav-item">
-                <Link className="nav-link text-dark" to={'/logout'}>logout</Link>
+                <Link className="nav-link text-dark fw-bolder" to={'/logout'}>logout</Link>
                 </li>
               :
                 <>
