@@ -154,7 +154,7 @@ const Forgetpassword = async (req,res,next) => {
     }
     else{
         const token = createToken(user.id)
-        console.log(token)
+        console.log("token forget password=> "+token)
         sendEmailPassword(user.email, token)
         //  res.json({
         //     khalid:true

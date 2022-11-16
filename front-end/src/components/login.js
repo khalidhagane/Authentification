@@ -27,8 +27,10 @@ function Login() {
           console.log(" page profile")
           const  roles = res.data.role.role
           const email = res.data.email
+          const name = res.data.name
           localStorage.setItem("role", roles)
           localStorage.setItem("email", email)
+          localStorage.setItem("name", name)
           // console.log(myRole)
           
           window.location.href = "/";

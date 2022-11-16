@@ -14,6 +14,7 @@ app.use(express.urlencoded({extended:true }))
 connectDB();
  
 
+
 const router = require('./routers/authRoute')
 const routerManager =  require('./routers/managerRoute')
 const routerLivreur =  require('./routers/livreurRoute')
@@ -25,7 +26,6 @@ app.use('/api/user',routerManager)
 app.use('/api/user',routerLivreur)
 app.use('/api/user',routerClient)
 app.use(errorHandler)
-
 
 const port = process.env.PORT || 3001
  app.listen(port,(err)=>{

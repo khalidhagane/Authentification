@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
-// const asyncHandler = require('express-async-handler');
-
+const asyncHandler = require('express-async-handler');
 
 // function sendemail
 const sendemail = (email,token) => {

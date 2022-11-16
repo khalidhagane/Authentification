@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose')
-const Role = require('../models/roleModel')
+// const Role = require('../models/roleModel')
 // // create Schema
 const authSchema = mongoose.Schema({
     name: {

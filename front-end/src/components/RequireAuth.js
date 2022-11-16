@@ -5,10 +5,9 @@ import Notaccess from "./Notaccess";
 
 
 const RequireAuth = ({Roles}) => {
-    // const { auth } = useAuth();
     const role = localStorage.getItem("role")
     const email = localStorage.getItem('email')
-    // console.log(Roles);
+    // console.log(Roles +"hhh");
     const location = useLocation();
     // console.log(auth.myRole+"aaaaaaa")
 
