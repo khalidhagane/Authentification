@@ -2,14 +2,9 @@ import { useContext, useState  } from 'react'
 import axios from 'axios'
 import { useNavigate,Link, useLocation} from 'react-router-dom';
 import Submit from './Submit';
-import useAuth from '../hooks/useAuth'
-// import { Outlet, Link } from "react-router-dom";
-
-
 
 function Login() {
 
-  const {setAuth} = useAuth()
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
@@ -34,15 +29,10 @@ function Login() {
           const email = res.data.email
           localStorage.setItem("role", roles)
           localStorage.setItem("email", email)
-          // const  cookie = res.data.role.role
-          // console.log(roles)
-          
           // console.log(myRole)
           
-          setAuth({email,password,roles})
           window.location.href = "/";
           // navigate(from, { replace: true });
-          
       })
       .catch(err => {
         console.log(err.response.data);
@@ -70,9 +60,6 @@ function Login() {
             <label className="custom-control-label" htmlFor="customCheck1"> Remember me </label>
           </div>
         </div>
-        {/* <div className="d-grid">
-          <button type="submit" className="btn btn-primary"> Submit </button>
-        </div> */}
         <Submit/>
         <p className="forgot-password text-right">
           Forgot <Link  to={'/forgot'}>password?</Link>

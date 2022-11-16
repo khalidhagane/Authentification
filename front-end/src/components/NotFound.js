@@ -1,12 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function NotFound() {
   return (
-    // <div className="auth-wrapper">
-    // <div className="auth-inner">NotFound 404</div>
-    // </div>
+    <div>
+      <Link to={"/"}>go back</Link>
+    
     <div style={{width:'100%'}}>
      <img className='notfound' src={window.location.origin + '/img/error404.jpg'} alt="logoMarhaba" style={{width:'100vw', height: '100vh'}}/>
+    </div>
     </div>
   )
 }

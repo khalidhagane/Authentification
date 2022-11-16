@@ -1,12 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-// import { useNavigate } from 'react-router-dom';
-// import { Link } from "react-router-dom";
 import Submit from './Submit';
 
 function Forgot() {
-    // const navigate = useNavigate();
     const [email, setEmail] = useState('')
     
     const [message,setMessage] = useState(false);
@@ -19,14 +16,10 @@ function Forgot() {
         email
       } 
   
-    //   await axios.post(API_URL, user,{withCredentials:true})
     await axios.post(API_URL, user)
 
         .then(res => {
             console.log("virefier email")
-            
-            
-          
         })
         .catch(err => {
           console.log(err.response.data);
@@ -43,11 +36,6 @@ function Forgot() {
             <label>Email address</label>
             <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
           </div>
-          
-          {/* <div className="d-grid">
-            <button type="submit"  className="btn btn-primary"> Submit </button>
-            
-          </div> */}
           <Submit/>
           
         </form>

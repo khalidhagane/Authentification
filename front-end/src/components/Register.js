@@ -6,15 +6,11 @@ import Submit from './Submit';
 
 function Register() {
 
- 
   const navigate = useNavigate();
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [role, setRole] = useState('')
   const [message,setMessage] = useState(false);
-
-  // const [message,setMessage] = useState(false);
 
   async function registerUser(event) {
     event.preventDefault()
@@ -56,18 +52,8 @@ function Register() {
         <label>Password</label>
         <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password"  />
       </div>
-      {/* <div className="mb-3">
-      <Select options={options}  /> */}
-        {/* <label>Role</label> */}
-        {/* <input type="text" className="form-control" value={role} onChange={(e) => setRole(e.target.value)} placeholder="enter Your role"  /> */}
-      {/* </div> */}
-      {/* <div className="d-grid">
-        <button type="submit" className="btn btn-primary" > Sign Up </button>
-      </div> */}
       <Submit/>
-      {/* <p className="forgot-password text-right">
-        Already registered <a href="/sign-in">sign in?</a>
-      </p> */}
+      
        <p className="forgot-password text-right">
        Already registered  <Link  to={'/login'}>sign in?</Link>
         </p>
