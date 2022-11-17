@@ -3,6 +3,9 @@ const cookie = require('cookie-parser')
 const Role = require('../models/roleModel')
 const User = require('../models/authModel')
 const { findOne } = require('../models/roleModel')
+
+
+
 const checkRoleClient = async (req,res,next)=> {
     const token = req.cookies['access-token']
     console.log(token)

@@ -38,10 +38,10 @@ const Login = asyncHandler(async (req,res, next) => {
                         res.status(400)
                         next(new Error('verify email pour validation'))
                     }else{
-                        // console.log(findUser.role)
+                        
                         const token = createToken(findUser.id)
                         return res
-                        .cookie('myrole', findUser.role)
+                        // .cookie('myrole', findUser.role)
                         .cookie('access-token',token)
                         .status(201).json({
                             id : findUser.id,
@@ -50,7 +50,6 @@ const Login = asyncHandler(async (req,res, next) => {
                             role: findUser.role,
                             message : 'login successfuly'
                         })
-                        // .console.log(cookie('myrole', findUser.role))
                         
                     }
                 }
@@ -73,7 +72,7 @@ const Login = asyncHandler(async (req,res, next) => {
 // url : /api/auth/regester
 // acess : public
 const Regester = asyncHandler(async (req,res) => {
-    const {email , password, name, role }= req.body
+    const {email , password, name }= req.body
 
     if(!email || !password || !name){
         res.status(400)
@@ -83,10 +82,7 @@ const Regester = asyncHandler(async (req,res) => {
 
     // check if user exists
     const authExists = await User.findOne({email})
-    const roles = await Role.findOne({role})
-    console.log(roles)
     if(authExists){
-        // res.status(400).send("user already exist")
         res.status(400)
         throw new Error('user already exist ')
     }
@@ -124,7 +120,6 @@ const verificationEmail = async (req,res)=>{
         user.token = null
         user.status = true
         await user.save()
-        
         res.status(201).send('verification valid ')
         
     } 
@@ -156,9 +151,6 @@ const Forgetpassword = async (req,res,next) => {
         const token = createToken(user.id)
         console.log("token forget password=> "+token)
         sendEmailPassword(user.email, token)
-        //  res.json({
-        //     khalid:true
-        //  })
         
          res.status(400) 
             return next({message:"check email pour valid password"})
@@ -176,10 +168,8 @@ const Forgetpassword = async (req,res,next) => {
 // acess : public
 const Resetpassword =  asyncHandler ( async (req,res) => {
     
-        
     const {password,confpassword} = req.body
-    // console.log('password', password)
-    // console.log('confpassword', confpassword)
+    
     if(!password || !confpassword){
         res.status(400)
         throw new Error('Please add password ')

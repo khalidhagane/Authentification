@@ -29,7 +29,6 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/notaccess" element={< Notaccess />} />
         <Route path="/logout" element={<Logout />} />
-
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/reset" element={<Reset />} />
         <Route path='/reset/:token' element={<Reset />} />

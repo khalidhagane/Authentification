@@ -15,7 +15,7 @@ const sendemail = (email,token) => {
         from: process.env.EMAIL,
         to: email,
         subject: 'Test mail',
-        text: 'Node.js testing mail for GeeksforGeeks',
+        text: 'testing mail',
         html: `<h2 >Pls Click on The link <a href="http://localhost:8081/api/auth/verifieremail/${token}">validation</a></h2>`, // html body
     };
     

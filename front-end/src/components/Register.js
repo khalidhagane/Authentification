@@ -19,7 +19,6 @@ function Register() {
       name,
       email,
       password,
-        
     }
     await axios.post(API_URL, user)
       .then(res => {
