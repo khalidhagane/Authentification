@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 // import useAuth from "../hooks/useAuth";
-import Notaccess from "./Notaccess";
+import Notaccess from "../../Pages/Notaccess";
 
 
 const RequireAuth = ({Roles}) => {

@@ -4,7 +4,6 @@ const connectDB = require('./config/configdb')
 const app = express();
 const cookie = require('cookie-parser')
 const cors = require('cors')
-
 const mongoose = require('mongoose');
 
 app.use(cors({origin:true, credentials:true}))
@@ -12,8 +11,6 @@ app.use(cookie())
 app.use(express.json())
 app.use(express.urlencoded({extended:true }))
 connectDB();
- 
-
 
 const router = require('./routers/authRoute')
 const routerManager =  require('./routers/managerRoute')

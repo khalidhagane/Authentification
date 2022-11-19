@@ -1,12 +1,11 @@
 import React from 'react'
-// import { Link } from 'react-router-dom';
 
-function Marhaba() {
+function Home() {
   return (
     < >
     <div className='d-flex justify-content-around align-items-center flex-wrap'>
       <div>
-        <img className='notfound' src={window.location.origin + '/img/home.png'} alt="logoMarhaba" />
+        <img className='notfound' src={window.location.origin + '/img/home1.png'} alt="photodilivry" />
       </div>
 
         <div className=" text-center p-4 ">
@@ -22,4 +21,4 @@ function Marhaba() {
 
 }
 
-export default Marhaba
+export default Home

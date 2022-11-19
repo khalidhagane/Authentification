@@ -3,28 +3,28 @@ import ReactDOM from "react-dom/client";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { Routes, Route } from 'react-router-dom'
 
-import RequireAuth from './components/RequireAuth'
+import RequireAuth from './components/Auth/RequireAuth'
 
-import Login from './components/login'
-import Register from './components/Register'
-import NotFound from './components/NotFound'
-import Profile from './components/Profile'
-import Marhaba from './components/Marhaba'
-import Layout from './components/Layout'
-import Forgot from './components/ForgotPassword';
-import Reset from './components/ResetPassword';
+import Login from './Pages/Form/login'
+import Register from './Pages/Form/Register'
+import NotFound from './Pages/NotFound'
+import Profile from './Pages/Profile'
+import Home from './Pages/Home/Home'
+import Layout from './Pages/Home/Layout'
+import Forgot from './Pages/Form/ForgotPassword';
+import Reset from './Pages/Form/ResetPassword';
 import Manager from './components/Manager';
 import Livreur from './components/Livreur';
 import Client from './components/Client';
-import Notaccess from './components/Notaccess';
-import Logout from './components/Logout';
+import Notaccess from './Pages/Notaccess';
+import Logout from './components/Utils/Logout';
 
 export default function App() {
   return (
     
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Marhaba />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/notaccess" element={< Notaccess />} />

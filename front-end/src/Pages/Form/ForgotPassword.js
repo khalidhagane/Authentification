@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-import Submit from './Submit';
+import Submit from '../../components/Utils/Submit';
 
 function Forgot() {
     const [email, setEmail] = useState('')
@@ -11,11 +11,7 @@ function Forgot() {
     async function registerUser(event) {
       event.preventDefault()
       const API_URL = "http://localhost:8081/api/auth/Forgetpassword"
-      const user = {
-        
-        email
-      } 
-  
+      const user = email
     await axios.post(API_URL, user)
 
         .then(res => {

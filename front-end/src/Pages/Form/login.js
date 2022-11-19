@@ -1,7 +1,7 @@
 import { useContext, useState  } from 'react'
 import axios from 'axios'
 import { useNavigate,Link, useLocation} from 'react-router-dom';
-import Submit from './Submit';
+import Submit from '../../components/Utils/Submit';
 
 function Login() {
 

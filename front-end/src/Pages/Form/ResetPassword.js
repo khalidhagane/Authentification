@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom';
-import Submit from './Submit';
+import Submit from '../../components/Utils/Submit';
 
 function Reset() {
     const navigate = useNavigate();

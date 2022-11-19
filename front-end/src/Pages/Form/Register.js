@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate,Link } from 'react-router-dom';
-import Submit from './Submit';
+import Submit from '../../components/Utils/Submit';
 // import Select from 'react-select'
 
 function Register() {
