@@ -1,0 +1,31 @@
+version: "3"
+services:
+  react-app:
+    image: front-end
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - marhaba-net
+  api-server:
+    image: server
+    ports:
+      - "8081:8081"
+    networks:
+      - marhaba-net
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - marhaba-net
+    volumes:
+      - mongo-data:/data/db
+networks:
+  marhaba-net:
+    external: true
+volumes:
+  mongo-data:
+    driver: local
