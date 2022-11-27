@@ -84,7 +84,8 @@ const Regester = asyncHandler(async (req,res) => {
     const authExists = await User.findOne({email})
     if(authExists){
         res.status(400)
-        throw new Error('user already exist ')
+        res.send({msg:'user already exist '})
+        // throw new Error('user already exist ')
     }
     //hash password
     const salt = await bcryptjs.genSalt(10)

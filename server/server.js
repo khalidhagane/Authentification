@@ -32,3 +32,5 @@ const port = process.env.PORT || 3001
     console.log(err)
 }
 })
+
+module.exports= app
